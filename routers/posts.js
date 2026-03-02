@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
+const postsList = require("../data/posts.js");
+
 router.get("/", (req, res) => {
-  res.send("Lista dei post");
+  const responseData = {
+    result: postsList,
+    success: true,
+  };
+
+  res.status(200).json(responseData);
 });
 
 router.get("/:id", (req, res) => {
-  res.send(`Dettaglio del post ${req.params.id}`);
+  const responseData = {
+    result: postsList.find((post) => post.id === parseInt(req.params.id)),
+    success: true,
+  };
+
+  res.status(200).json(responseData);
 });
 
 router.post("/", (req, res) => {
